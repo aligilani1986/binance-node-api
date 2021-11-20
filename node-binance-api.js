@@ -5854,10 +5854,12 @@ let api = function Binance(options = {}) {
                     if (Binance.options.reconnect) miniTicker(callback);
                 };
                 let subscription = subscribe('!miniTicker@arr@1000ms', function (data) {
-                    let markets = {};
+                    let markets = [];
                     for (let obj of data) {
                         if (obj.s.indexOf('USDT') >= 0) {
-                            markets[obj.s] = {
+
+                            markets.push({
+                                pair: obj.s,
                                 close: obj.c,
                                 open: obj.o,
                                 high: obj.h,
@@ -5865,7 +5867,7 @@ let api = function Binance(options = {}) {
                                 volume: obj.v,
                                 quoteVolume: obj.q,
                                 eventTime: obj.E
-                            };
+                            });
                         }
                     }
                     callback(markets);
