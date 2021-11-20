@@ -3347,10 +3347,10 @@ let api = function Binance(options = {}) {
                             resolve(response);
                         }
                     }
-                    publicRequest(base + 'v3/exchangeInfo', {}, callback);
+                    publicRequest((Binance.options.test ? baseTest : base) + 'v3/exchangeInfo', {}, callback);
                 })
             } else {
-                publicRequest(base + 'v3/exchangeInfo', {}, callback);
+                publicRequest((Binance.options.test ? baseTest : base) + 'v3/exchangeInfo', {}, callback);
             }
         },
 
