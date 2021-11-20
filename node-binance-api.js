@@ -5853,7 +5853,7 @@ let api = function Binance(options = {}) {
                 let reconnect = () => {
                     if (Binance.options.reconnect) miniTicker(callback);
                 };
-                let subscription = subscribe('!miniTicker@arr@1000', function (data) {
+                let subscription = subscribe('!miniTicker@arr@1000ms', function (data) {
                     let markets = {};
                     for (let obj of data) {
                         if (obj.s.indexOf('USDT') >= 0) {
