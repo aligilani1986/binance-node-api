@@ -5545,12 +5545,12 @@ let api = function Binance(options = {}) {
                 if (Array.isArray(symbols)) {
                     if (!isArrayUnique(symbols)) throw Error('depth: "symbols" cannot contain duplicate elements.');
                     let streams = symbols.map(function (symbol) {
-                        return symbol.toLowerCase() + '@depth@100ms';
+                        return symbol.toLowerCase() + '@depth20@100ms';
                     });
                     subscription = subscribeCombined(streams, callback, reconnect);
                 } else {
                     let symbol = symbols;
-                    subscription = subscribe(symbol.toLowerCase() + '@depth@100ms', callback, reconnect);
+                    subscription = subscribe(symbol.toLowerCase() + '@depth20@100ms', callback, reconnect);
                 }
                 return subscription.endpoint;
             },
