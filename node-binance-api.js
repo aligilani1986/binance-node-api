@@ -746,14 +746,14 @@ let api = function Binance(options = {}) {
                 host: parseProxy(socksproxy)[1],
                 port: parseProxy(socksproxy)[2]
             });
-            ws = new WebSocket(combineStream + queryParams, { agent: agent });
+            ws = new WebSocket((Binance.options.test ? combineStreamTest : combineStream) + queryParams, { agent: agent });
         } else if (httpsproxy !== false) {
             if (Binance.options.verbose) Binance.options.log('using proxy server ' + httpsproxy);
             let config = url.parse(httpsproxy);
             let agent = new HttpsProxyAgent(config);
-            ws = new WebSocket(combineStream + queryParams, { agent: agent });
+            ws = new WebSocket((Binance.options.test ? combineStreamTest : combineStream) + queryParams, { agent: agent });
         } else {
-            ws = new WebSocket(combineStream + queryParams);
+            ws = new WebSocket((Binance.options.test ? combineStreamTest : combineStream) + queryParams);
         }
 
         ws.reconnect = Binance.options.reconnect;
