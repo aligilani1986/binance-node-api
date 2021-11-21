@@ -5556,6 +5556,25 @@ let api = function Binance(options = {}) {
             },
 
             /**
+             * Websocket depth chart
+             * @param {array/string} symbols - an array or string of symbols to query
+             * @param {function} callback - callback function
+             * @return {string} the websocket endpoint
+             */
+            multiStream: function depth(streams, callback) {
+                let reconnect = () => {
+                    if (Binance.options.reconnect) depth(symbols, callback);
+                };
+                let subscription;
+
+                subscription = subscribeCombined(streams, (data) => {
+
+                    callback(data);
+                }, reconnect);
+
+                return subscription.endpoint;
+            },
+            /**
              * Websocket depth cache
              * @param {array/string} symbols - an array or string of symbols to query
              * @param {function} callback - callback function
